@@ -51,12 +51,24 @@ The project includes dedicated Spring profiles and sample environment variable f
    set -a
    source env/staging.env
    set +a
-   mvn spring-boot:run
    ```
-   When running the packaged jar, you can also pass the profile inline:
-   ```bash
-   SPRING_PROFILES_ACTIVE=production java -jar target/java-spring-boot-boilerplate-1.0.0.jar
-   ```
+
+### Run with a profile active
+
+Once the environment variables are loaded, choose one of the following commands:
+
+- **Run from Maven with the staging profile**
+  ```bash
+  mvn spring-boot:run -Dspring-boot.run.profiles=staging
+  ```
+- **Run from Maven with the production profile**
+  ```bash
+  mvn spring-boot:run -Dspring-boot.run.profiles=production
+  ```
+- **Run the packaged jar with an explicit profile**
+  ```bash
+  SPRING_PROFILES_ACTIVE=production java -jar target/java-spring-boot-boilerplate-1.0.0.jar
+  ```
 
 The active profile automatically picks up the matching configuration file (`application-staging.yml` or `application-production.yml`) under `src/main/resources/`.
 
