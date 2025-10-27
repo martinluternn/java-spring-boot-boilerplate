@@ -1,13 +1,14 @@
 # Build stage
-FROM maven:3.8-openjdk-17 AS build
-COPY src /home/app/src
+FROM maven:3.9.6-eclipse-temurin-21 AS build
+WORKDIR /workspace
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
 
-COPY pom.xml /home/app
-RUN mvn -f /home/app/pom.xml clean package -DskipTests=true
-
-# Package stage
-FROM openjdk:21-ea-17-slim-buster
-COPY --from=build /home/app/target/java-spring-boot-boilerplate-0.0.1-SNAPSHOT.jar /usr/local/lib/app.jar
+# Runtime stage
+FROM eclipse-temurin:21-jre
+WORKDIR /app
+COPY --from=build /workspace/target/java-spring-boot-boilerplate-1.0.0.jar app.jar
 
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "/usr/local/lib/app.jar"]
+ENTRYPOINT ["java", "-jar", "./app.jar"]

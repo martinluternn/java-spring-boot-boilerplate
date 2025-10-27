@@ -1,23 +1,25 @@
 package com.mewebstudio.javaspringbootboilerplate.util;
 
-import com.mewebstudio.javaspringbootboilerplate.Constants;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 @Tag("unit")
 @DisplayName("Unit tests for AESCipher")
-public class AESCipherTest {
+class AESCipherTest {
+
+    private static final String SECRET_KEY = "ZsV6Zj53yzT8zvuTl49FupPCADQIxAnV";
+
     @Test
-    @DisplayName("Test class for encryption and decryption scenarios")
-    public void testEncryptionAndDecryption() throws Exception {
+    @DisplayName("Encrypting and decrypting a value produces the original text")
+    void encryptAndDecryptRoundTrip() throws Exception {
         String plainText = "Hello, World!";
 
-        String encryptedText = AESCipher.encrypt(plainText, Constants.APP_SECRET_KEY);
-        String decryptedText = AESCipher.decrypt(encryptedText, Constants.APP_SECRET_KEY);
+        String encryptedText = AESCipher.encrypt(plainText, SECRET_KEY);
+        String decryptedText = AESCipher.decrypt(encryptedText, SECRET_KEY);
 
-        assertEquals(plainText, decryptedText);
+        assertThat(decryptedText).isEqualTo(plainText);
     }
 }
