@@ -1,0 +1,37 @@
+spring:
+  datasource:
+    url: ${STAGING_DB_URL:jdbc:postgresql://localhost:5432/app_staging}
+    username: ${STAGING_DB_USERNAME:staging_user}
+    password: ${STAGING_DB_PASSWORD:staging_password}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+
+server:
+  port: ${SERVER_PORT:8081}
+  servlet:
+    context-path: ${SERVER_CONTEXT_PATH:/}
+
+logging:
+  level:
+    root: INFO
+    com.mewebstudio.javaspringbootboilerplate: DEBUG
+  file:
+    name: ${LOG_FILE:logs/application-staging.log}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: when-authorized

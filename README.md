@@ -37,5 +37,28 @@ docker compose up --build
 mvn test
 ```
 
+## Environment configuration
+The project includes dedicated Spring profiles and sample environment variable files for staging and production deployments.
+
+1. Copy the sample file for the environment you want to run:
+   ```bash
+   cp env/staging.env.example env/staging.env       # for staging
+   cp env/production.env.example env/production.env # for production
+   ```
+2. Update the copied file with the correct database credentials, ports, and any other overrides your environment requires.
+3. Load the variables before starting the application. For example, on macOS/Linux:
+   ```bash
+   set -a
+   source env/staging.env
+   set +a
+   mvn spring-boot:run
+   ```
+   When running the packaged jar, you can also pass the profile inline:
+   ```bash
+   SPRING_PROFILES_ACTIVE=production java -jar target/java-spring-boot-boilerplate-1.0.0.jar
+   ```
+
+The active profile automatically picks up the matching configuration file (`application-staging.yml` or `application-production.yml`) under `src/main/resources/`.
+
 ## Next steps
 Use this project as a baseline and plug in your preferred persistence, messaging, or security modules. The codebase intentionally stays minimal so you can tailor it to your application's needs.
