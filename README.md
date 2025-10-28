@@ -1,10 +1,10 @@
 # Java Spring Boot Boilerplate
 
-A lightweight starting point for building RESTful services with Spring Boot 3 and Java 21. The template keeps only the essentials so you can add your own persistence, security, or messaging layers as needed.
+A lightweight starting point for building RESTful services with Spring Boot 3 and Java 25. The template keeps only the essentials so you can add your own persistence, security, or messaging layers as needed.
 
 ## What's included
-- Spring Boot 3.2 with Actuator, Validation, and Web starters
-- Java 21 toolchain configuration
+- Spring Boot 3.5 with Actuator, Validation, and Web starters
+- Java 25 toolchain configuration
 - Simple health endpoint (`/api/health`) for smoke testing
 - Utility helpers for AES encryption and random string generation
 - Dockerfile and Docker Compose setup for rapid local execution
@@ -12,7 +12,7 @@ A lightweight starting point for building RESTful services with Spring Boot 3 an
 ## Getting started
 
 ### Prerequisites
-- Java 21
+- Java 25
 - Maven 3.9+
 - Docker (optional, for containerized runs)
 
